@@ -28,11 +28,19 @@ def specify_h1_text(page_url, html_h1_content)
   end
 end
 
+def specify_page_url(page_url)
+  it "should exist" do
+    visit page_url
+  end
+end
+
 describe "StaticPages" do
   describe "Home page" do
-    page_url = '/static_pages/home'
-    page_title = "Home"
-    page_h1_text = "Sample App"
+    let page_url = '/static_pages/home'
+    let page_title = "Home"
+    let page_h1_text = "Sample App"
+
+    specify_page_url page_url
 
     specify_h1_text(page_url, page_h1_text)
 
@@ -42,8 +50,10 @@ describe "StaticPages" do
   end
 
   describe "Help Page" do
-    page_url = '/static_pages/help'
-    page_title = 'Help'
+    let page_url = '/static_pages/help'
+    let page_title = 'Help'
+
+    specify_page_url page_url
 
     specify_h1_text(page_url, page_title)
 
@@ -53,8 +63,10 @@ describe "StaticPages" do
   end
 
   describe "About Page" do
-    page_url = '/static_pages/about'
-    page_title = 'About Us'
+    let page_url = '/static_pages/about'
+    let page_title = 'About Us'
+
+    specify_page_url page_url
 
     specify_h1_text(page_url, page_title)
 
@@ -63,5 +75,17 @@ describe "StaticPages" do
     specify_one_title(page_url)
   end
 
+  describe "Contact Page" do
+    let page_url = "/static_pages/contact"
+    let page_title = "Contact"
+
+    specify_page_url page_url
+
+    specify_h1_text(page_url, page_title)
+
+    specify_title(page_url, page_title)
+
+    specify_one_title(page_url)
+  end
 end
 
