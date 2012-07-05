@@ -16,7 +16,7 @@ gem 'json'
 
 # Marcel added: Needs JavaScript runtime for it not to break
 gem 'execjs', '1.4.0'
-# Marcel added ExecJS needs therubyracer to work: Its a v8 JavaScript interpreter
+# Marcel added: ExecJS needs therubyracer to work: Its a v8 JavaScript interpreter
 gem 'therubyracer'
 
 # Gems used only for assets and not required
