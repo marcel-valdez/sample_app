@@ -28,6 +28,7 @@ def specify_h1_text(page_url, html_h1_content)
   end
 end
 
+# @param [String] page_url the relative URL of the page
 def specify_page_url(page_url)
   it "should exist" do
     visit page_url
@@ -37,23 +38,23 @@ end
 describe "StaticPages" do
   describe "Home page" do
     let page_url = '/static_pages/home'
-    let page_title = "Home"
-    let page_h1_text = "Sample App"
+    let page_title = 'Home'
+    let page_h1_text = 'Sample App'
 
-    specify_page_url page_url
+    specify_page_url(page_url)
 
     specify_h1_text(page_url, page_h1_text)
 
     specify_title(page_url, page_title)
 
-    specify_one_title page_url
+    specify_one_title(page_url)
   end
 
   describe "Help Page" do
     let page_url = '/static_pages/help'
     let page_title = 'Help'
 
-    specify_page_url page_url
+    specify_page_url(page_url)
 
     specify_h1_text(page_url, page_title)
 
@@ -66,7 +67,7 @@ describe "StaticPages" do
     let page_url = '/static_pages/about'
     let page_title = 'About Us'
 
-    specify_page_url page_url
+    specify_page_url(page_url)
 
     specify_h1_text(page_url, page_title)
 
@@ -76,10 +77,10 @@ describe "StaticPages" do
   end
 
   describe "Contact Page" do
-    let page_url = "/static_pages/contact"
-    let page_title = "Contact"
+    let page_url = '/static_pages/contact'
+    let page_title = 'Contact'
 
-    specify_page_url page_url
+    specify_page_url(page_url)
 
     specify_h1_text(page_url, page_title)
 

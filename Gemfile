@@ -11,6 +11,10 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails'
+  # Marcel added: Used for executing code coverage on the tests.
+  gem 'simplecov'
+  # Marcel added: Used for automatically calling tests upon a modification of the targets or the test itself.
+  gem 'guard-rspec'
 end
 
 gem 'json'
@@ -32,6 +36,10 @@ gem 'jquery-rails'
 
 group :test do
   gem 'capybara'
+  gem 'rb-inotify'
+  gem 'libnotify'
+  gem 'guard-spork'
+  gem 'spork'
 end
 
 group :production do
