@@ -8,6 +8,13 @@ def specify_one_title(page_url)
   end
 end
 
+def specify_base_title(page_url)
+  it "should have only one title" do
+    visit page_url
+    page.should have_selector('title', text: "Ruby on Rails Tutorial Sample App")
+  end
+end
+
 # @param [String] page_url relative path to the page to visit
 # @param [String] page_title the title of the page
 def specify_title(page_url, page_title)
@@ -16,6 +23,15 @@ def specify_title(page_url, page_title)
     page.should have_selector(
                     'title',
                     text: "Ruby on Rails Tutorial Sample App | #{page_title}")
+  end
+end
+
+def specify_only_base_title (page_url)
+  it "should only contain the base title" do
+    visit page_url
+    page.should_not have_selector(
+                    'title',
+                    text: "Ruby on Rails Tutorial Sample App |")
   end
 end
 
@@ -38,14 +54,13 @@ end
 describe "StaticPages" do
   describe "Home page" do
     let page_url = '/static_pages/home'
-    let page_title = 'Home'
     let page_h1_text = 'Sample App'
 
     specify_page_url(page_url)
 
-    specify_h1_text(page_url, page_h1_text)
+    specify_only_base_title(page_url)
 
-    specify_title(page_url, page_title)
+    specify_h1_text(page_url, page_h1_text)
 
     specify_one_title(page_url)
   end
@@ -53,6 +68,8 @@ describe "StaticPages" do
   describe "Help Page" do
     let page_url = '/static_pages/help'
     let page_title = 'Help'
+
+    specify_base_title(page_url)
 
     specify_page_url(page_url)
 
@@ -67,6 +84,8 @@ describe "StaticPages" do
     let page_url = '/static_pages/about'
     let page_title = 'About Us'
 
+    specify_base_title(page_url)
+
     specify_page_url(page_url)
 
     specify_h1_text(page_url, page_title)
@@ -79,6 +98,8 @@ describe "StaticPages" do
   describe "Contact Page" do
     let page_url = '/static_pages/contact'
     let page_title = 'Contact'
+
+    specify_base_title(page_url)
 
     specify_page_url(page_url)
 
