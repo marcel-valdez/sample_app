@@ -4,6 +4,8 @@ ruby '1.9.3'
 gem 'rails', '3.1.0'
 # Marcel added: Force using 0.9.3, default for ruby 1.9.3-p194
 gem 'rake', '0.9.3.beta.1'
+
+gem 'bootstrap-sass'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
