@@ -15,7 +15,10 @@ SampleApp::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
+
+  # Marcel added precompile resource for scss stuff:
+  config.assets.precompile += ['custom.css.scss']
 
   # Generate digests for assets URLs
   config.assets.digest = true

@@ -25,5 +25,6 @@ test:
   database: sample_app_test
 
 production:
-  <<: *common
+  adapter: postgresql
+  pool: 5
   database: sample_app_live
