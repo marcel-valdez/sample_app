@@ -30,6 +30,7 @@ gem 'therubyracer'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
+  # Marcel modified: Changed from ~> 3.1.0 to 3.1.4 (otherwise deployment does not work)
   gem 'sass-rails', "3.1.4"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'

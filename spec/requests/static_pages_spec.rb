@@ -51,11 +51,25 @@ def specify_page_url(page_url)
   end
 end
 
+def specify_route(page_url, path_name)
+  it "should have route #{page_url} in #{path_name}" do
+    eval('visit ' + path_name)
+    eval('assert_not_nil ' + path_name)
+    eval('assert_equal page_url, ' + path_name)
+  end
+end
+
 describe "StaticPages" do
   describe "Home page" do
-    let page_url = '/static_pages/home'
-    let page_h1_text = 'Sample App'
 
+    page_url = '/'
+    page_h1_text = 'Sample App'
+
+    begin
+    specify_route(page_url, 'root_path')
+    rescue
+      fail "Url route not found: root_path:#{page_url}"
+    end
     specify_page_url(page_url)
 
     specify_only_base_title(page_url)
@@ -66,8 +80,14 @@ describe "StaticPages" do
   end
 
   describe "Help Page" do
-    let page_url = '/static_pages/help'
-    let page_title = 'Help'
+    page_url = '/help'
+    page_title = 'Help'
+
+    begin
+      specify_route(page_url, 'help_path')
+    rescue
+      fail "Url route not found: help_path:#{page_url}"
+    end
 
     specify_base_title(page_url)
 
@@ -81,9 +101,14 @@ describe "StaticPages" do
   end
 
   describe "About Page" do
-    let page_url = '/static_pages/about'
-    let page_title = 'About Us'
+    page_url = '/about'
+    page_title = 'About Us'
 
+    begin
+    specify_route(page_url, 'about_path')
+    rescue
+      fail "Url route not found: about_path:#{page_url}"
+    end
     specify_base_title(page_url)
 
     specify_page_url(page_url)
@@ -96,12 +121,19 @@ describe "StaticPages" do
   end
 
   describe "Contact Page" do
-    let page_url = '/static_pages/contact'
-    let page_title = 'Contact'
+    page_url = '/contact'
+    page_title = 'Contact'
 
-    specify_base_title(page_url)
+
+    begin
+      specify_route(page_url, 'contact_path')
+    rescue
+      fail "Url route not found: contact_path:#{page_url}"
+    end
 
     specify_page_url(page_url)
+
+    specify_base_title(page_url)
 
     specify_h1_text(page_url, page_title)
 
