@@ -1,34 +1,23 @@
 require 'spec_helper'
+require 'support/utilities'
 
-# @param [String] page_url relative path to the page to visit
-def specify_one_title(page_url)
+def specify_one_title
   it "should have only one title" do
-    visit page_url
     page.should have_selector('title', count: 1)
   end
 end
 
-def specify_base_title(page_url)
-  it "should have only one title" do
-    visit page_url
-    page.should have_selector('title', text: "Ruby on Rails Tutorial Sample App")
-  end
-end
-
-# @param [String] page_url relative path to the page to visit
 # @param [String] page_title the title of the page
-def specify_title(page_url, page_title)
+def specify_title(page_title)
   it "should have the right title" do
-    visit page_url
     page.should have_selector(
                     'title',
-                    text: "Ruby on Rails Tutorial Sample App | #{page_title}")
+                    text: page_title)
   end
 end
 
-def specify_only_base_title (page_url)
+def specify_only_base_title
   it "should only contain the base title" do
-    visit page_url
     page.should_not have_selector(
                     'title',
                     text: "Ruby on Rails Tutorial Sample App |")
@@ -37,22 +26,21 @@ end
 
 # @param [String] html_h1_content text content of the h1 element
 # @param [String] page_url relative path to the page to visit
-def specify_h1_text(page_url, html_h1_content)
+def specify_h1_text(html_h1_content)
   it "should have the content '#{html_h1_content}'" do
-    visit page_url
     page.should have_selector('h1', text: html_h1_content)
   end
 end
 
 # @param [String] page_url the relative URL of the page
 def specify_page_url(page_url)
-  it "should exist" do
+  it "#{page_url} should exist" do
     visit page_url
   end
 end
 
 def specify_route(page_url, path_name)
-  it "should have route #{page_url} in #{path_name}" do
+  it "#{path_name} should have route #{page_url}" do
     eval('visit ' + path_name)
     eval('assert_not_nil ' + path_name)
     eval('assert_equal page_url, ' + path_name)
@@ -70,13 +58,18 @@ describe "StaticPages" do
     rescue
       fail "Url route not found: root_path:#{page_url}"
     end
+
     specify_page_url(page_url)
 
-    specify_only_base_title(page_url)
+    before { visit page_url }
 
-    specify_h1_text(page_url, page_h1_text)
+    specify_only_base_title
 
-    specify_one_title(page_url)
+    specify_title full_title('')
+
+    specify_h1_text page_h1_text
+
+    specify_one_title
   end
 
   describe "Help Page" do
@@ -84,20 +77,20 @@ describe "StaticPages" do
     page_title = 'Help'
 
     begin
-      specify_route(page_url, 'help_path')
+      specify_route page_url, 'help_path'
     rescue
       fail "Url route not found: help_path:#{page_url}"
     end
 
-    specify_base_title(page_url)
+    specify_page_url page_url
 
-    specify_page_url(page_url)
+    before { visit page_url }
 
-    specify_h1_text(page_url, page_title)
+    specify_h1_text page_title
 
-    specify_title(page_url, page_title)
+    specify_title full_title(page_title)
 
-    specify_one_title(page_url)
+    specify_one_title
   end
 
   describe "About Page" do
@@ -105,19 +98,20 @@ describe "StaticPages" do
     page_title = 'About Us'
 
     begin
-    specify_route(page_url, 'about_path')
+    specify_route page_url, 'about_path'
     rescue
       fail "Url route not found: about_path:#{page_url}"
     end
-    specify_base_title(page_url)
 
-    specify_page_url(page_url)
+    specify_page_url page_url
 
-    specify_h1_text(page_url, page_title)
+    before { visit page_url }
 
-    specify_title(page_url, page_title)
+    specify_h1_text page_title
 
-    specify_one_title(page_url)
+    specify_title full_title(page_title)
+
+    specify_one_title
   end
 
   describe "Contact Page" do
@@ -126,20 +120,20 @@ describe "StaticPages" do
 
 
     begin
-      specify_route(page_url, 'contact_path')
+      specify_route page_url, 'contact_path'
     rescue
       fail "Url route not found: contact_path:#{page_url}"
     end
 
-    specify_page_url(page_url)
+    specify_page_url page_url
 
-    specify_base_title(page_url)
+    before { visit page_url }
 
-    specify_h1_text(page_url, page_title)
+    specify_h1_text page_title
 
-    specify_title(page_url, page_title)
+    specify_title full_title(page_title)
 
-    specify_one_title(page_url)
+    specify_one_title
   end
 end
 
