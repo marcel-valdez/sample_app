@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'support/utilities'
+include ApplicationHelper
 
 describe "UserPages" do
   subject { page }
