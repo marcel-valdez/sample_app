@@ -20,7 +20,12 @@ group :development, :test do
   gem 'guard-rspec'
 end
 
+group :development do
+  gem 'annotate'
+end
+
 gem 'json'
+gem 'bcrypt-ruby'
 
 # Marcel added: Needs JavaScript runtime for it not to break
 gem 'execjs', '1.4.0'

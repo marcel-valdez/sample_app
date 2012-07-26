@@ -2,7 +2,7 @@ require "rspec"
 
 describe ApplicationHelper do
 
-  it "Should create the empty base-title" do
+  it "Should create the empty base title" do
 
     # Arrange
     expected_title = "Ruby on Rails Tutorial Sample App"
