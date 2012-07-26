@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true,
             length: {maximum: 50}
+  validates_format_of :name, with: /\A[a-zA-Z]+[a-zA-Z\. ]*\Z/
   validates :email, presence: true,
             format: {with: EMAIL_FORMAT_REGX},
             uniqueness: {case_sensitive: false}
@@ -31,6 +32,6 @@ class User < ActiveRecord::Base
   end
 
   before_save do |user|
-    user.email = email.downcase
+    user.email.downcase!
   end
 end

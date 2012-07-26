@@ -55,6 +55,28 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe "name (in)validation format" do
+    it "should be invalid" do
+      invalid_names = %w[. 1 _ < > ; ' ` ~]
+
+      invalid_names.each do |invalid_name|
+        @user.name = invalid_name
+        @user.should be_invalid
+      end
+    end
+
+    it "should be valid" do
+      valid_names = ["a", "a a", "I", "II", "J."]
+
+      valid_names.each do |valid_name|
+        @user.name = valid_name
+
+        puts "#{valid_name} should be valid" if @user.invalid?
+        @user.should be_valid
+      end
+    end
+  end
+
   describe "email is not present validation" do
     before { @user.email = " " }
 
@@ -151,4 +173,13 @@ describe User do
       specify { user_for_invalid_password.should be_false }
     end
   end
+
+  describe "email should downcase before saving" do
+    before do
+      @user.update_attribute(:email, @user.email.upcase)
+    end
+
+    specify { @user.email.should match @user.email.downcase }
+  end
+
 end
