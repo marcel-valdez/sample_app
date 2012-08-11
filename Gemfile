@@ -24,6 +24,10 @@ group :development do
   gem 'annotate'
 end
 
+group :test do
+  gem 'factory_girl_rails'
+end
+
 gem 'json'
 gem 'bcrypt-ruby'
 

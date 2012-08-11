@@ -50,6 +50,8 @@ Spork.prefork do
     config.infer_base_class_for_anonymous_controllers = false
   end
 
+  #require 'factories.rb'
+
 end
 
 Spork.each_run do
