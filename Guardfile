@@ -27,15 +27,18 @@ guard 'rspec', :version => 2, :all_after_pass => false, :cli => '--drb' do
       "spec/requests/#{target}_pages_spec.rb"
     end
   end
+  # Marcel added: Watch for a change in the locale configurations, and execute acceptance tests
+  watch(%r{^config/locales/.+$}) { "spec/requests/" }
+
   watch('config/routes.rb')                           { :rspec } # "spec/routing" } <-- Marcel edited
   watch('app/controllers/application_controller.rb')  { :rspec } # "spec/controllers" } <-- Marcel edited
   
   # Capybara request specs
-  watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
+  #watch(%r{^app/views/(.+)/.*\.(erb|haml)$})          { |m| "spec/requests/#{m[1]}_spec.rb" }
   
   # Turnip features and steps
-  watch(%r{^spec/acceptance/(.+)\.feature$})
-  watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
+  #watch(%r{^spec/acceptance/(.+)\.feature$})
+  #watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
 
 guard 'spork', :cucumber_env => { 'RAILS_ENV' => 'test' }, :rspec_env => { 'RAILS_ENV' => 'test' } do
