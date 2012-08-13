@@ -30,7 +30,12 @@ class User < ActiveRecord::Base
     return "#{self.name} <#{self.email}>"
   end
 
-  before_save do |user|
-    user.email.downcase!
+  before_save { |user| user.email.downcase! }
+  before_save :create_remember_token
+
+  private
+  def create_remember_token
+    # Create the token
+    self.remember_token = SecureRandom.urlsafe_base64
   end
 end

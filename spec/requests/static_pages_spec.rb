@@ -53,6 +53,8 @@ describe "StaticPages" do
                           'title',
                           text: "Ruby on Rails Tutorial Sample App |")
     end
+
+    it { should have_link 'Sign in', href: signin_path }
   end
 
   describe "Help Page" do
