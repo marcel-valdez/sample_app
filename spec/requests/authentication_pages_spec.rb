@@ -13,10 +13,10 @@ describe "Authentication behavior: " do
     it { should have_button 'Sign in' }
 
     it { should have_selector 'label', text: "Email" }
-    it { should have_selector 'input#session_email' }
+    it { should have_selector 'input#email' }
 
     it { should have_selector 'label', text: "Password" }
-    it { should have_selector 'input#session_password' }
+    it { should have_selector 'input#password' }
 
     describe 'with empty credentials' do
       before { click_button 'Sign in' }
